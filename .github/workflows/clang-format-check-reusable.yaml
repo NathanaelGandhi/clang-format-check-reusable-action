@@ -34,10 +34,7 @@ jobs:
       - name: Generate format differences
         run: |
           cd repo
-          # find .c and .h files and apply style .clang-format files within those directories and their subdirectories
-          find . -type d -name .clang-format -execdir sh -c 'clang-format -i -style=file "$0"/*.c "$0"/*.h' {} \;
-          # find .c and .h files and apply style .clang-format file in the same directory or in one of the parent directories.
-          #find . -name "*.[ch]" -exec clang-format -i -style=file {} +
+          find . -name "*.[ch]" -exec clang-format -i -style=file {} +
           git diff > $GITHUB_WORKSPACE/style_differences.txt
       - name: Archive Static Analysis Artifacts
         uses: actions/upload-artifact@v3
